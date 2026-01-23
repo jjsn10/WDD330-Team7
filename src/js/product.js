@@ -24,5 +24,11 @@ document
 
 
 const productId = getParam("product");
-productDetails(productId);
-console.log(findProductById(productId));
+(async () => await productDetails(productId))();
+//console.log(productId);
+/*(async () => {
+  const product = await productDetails(productId);
+  //console.log("Line 31: ",product);
+})();*/
+/*console.log("Line 29: ",productDetails(productId));
+console.log(findProductById(productId));*/
