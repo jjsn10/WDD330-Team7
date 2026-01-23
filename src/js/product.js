@@ -1,5 +1,6 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, getParam } from "./utils.mjs";
 import { findProductById } from "./productData.mjs";
+import { productDetails } from "./productDetails.mjs";
 
 function addProductToCart(product) {
   let cartItems = getLocalStorage("so-cart") || [];
@@ -20,3 +21,8 @@ async function addToCartHandler(e) {
 document
   .getElementById("addToCart")
   .addEventListener("click", addToCartHandler);
+
+
+const productId = getParam("product");
+productDetails(productId);
+console.log(findProductById(productId));
