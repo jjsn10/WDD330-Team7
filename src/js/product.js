@@ -23,7 +23,6 @@ import { productDetails } from "./productDetails.mjs";
   .getElementById("addToCart")
   .addEventListener("click", addToCartHandler);*/
 
-
 const productId = getParam("product");
 (async () => await productDetails(productId))();
 //console.log(productId);
