@@ -25,3 +25,9 @@ export function getParam(param){
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get(param);
 }
+export function renderList(fn, products, el) {
+    //const productListElement = document.getElementById(category);
+    const firstFour = products.slice(0, 4);
+    //el.innerHTML =firstFour.map(fn).join("");
+    el.insertAdjacentHTML("afterbegin", firstFour.map(fn).join(""));
+}
