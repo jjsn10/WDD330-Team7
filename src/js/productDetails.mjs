@@ -19,7 +19,8 @@ export async function productDetails(productId) {
   // add listener to Add to Cart button
   document
     .getElementById("addToCart")
-    .addEventListener("click", addToCart(product));
+    .addEventListener("click", () => addToCart(product));
+    // added arrow function so it doens't call addToCart when the page loads and only when the button is clicked.
 
   if (product) {
     document.getElementById("productName").textContent = product.Name;
