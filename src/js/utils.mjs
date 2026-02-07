@@ -25,9 +25,41 @@ export function getParam(param){
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get(param);
 }
-export function renderList(fn, products, el) {
+export function renderList(fn, products, el, clear=true) {
     //const productListElement = document.getElementById(category);
     const firstFour = products.slice(0, 4);
     //el.innerHTML =firstFour.map(fn).join("");
+    /*if (clear) {
+        el.innerHTML = "";
+    }*/
     el.insertAdjacentHTML("afterbegin", firstFour.map(fn).join(""));
+}
+
+ async function loadTemplate(path) {
+   const res = await fetch(path);
+    if (res.ok) {
+      const html = await res.text();
+      return html;
+    }
+}
+
+export function renderWithTemplate(templateFn, parentElement, data, callback, position="afterbegin", clear=true) {
+    // get template using function...no need to loop this time.
+    if (clear) {
+        parentElement.innerHTML = "";
+    }
+    parentElement.insertAdjacentHTML(position, templateFn);
+    if(callback) {
+        callback(data);
+    }
+}
+export async function loadHeaderFooter(){
+  const headerTemplateFn = await loadTemplate("/partials/header.html");
+  const footerTemplateFn = await loadTemplate("/partials/footer.html");
+
+  const headerElement = document.querySelector("#main-header");
+  const footerElement = document.querySelector("#main-footer");
+
+  renderWithTemplate(headerTemplateFn, headerElement);
+  renderWithTemplate(footerTemplateFn, footerElement);
 }

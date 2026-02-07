@@ -1,6 +1,6 @@
 import { getParam } from "./utils.mjs";
 //import { findProductById } from "./productData.mjs";
-import { productDetails } from "./productDetails.mjs";
+import productDetails from "./productDetails.mjs";
 
 /*function addProductToCart(product) {
   let cartItems = getLocalStorage("so-cart") || [];
@@ -24,7 +24,9 @@ import { productDetails } from "./productDetails.mjs";
   .addEventListener("click", addToCartHandler);*/
 
 const productId = getParam("product");
-(async () => await productDetails(productId))();
+/*console.log("Line 27: productId:", productId);*/
+(async ()=> await productDetails(productId))();
+
 //console.log(productId);
 /*(async () => {
   const product = await productDetails(productId);

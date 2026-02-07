@@ -1,5 +1,5 @@
 import { getData } from "./productData.mjs";
-import { renderList } from "./utils.mjs";
+import { renderList,qs } from "./utils.mjs";
 
 function productCardTemplate(product) {
     return `
@@ -15,9 +15,11 @@ function productCardTemplate(product) {
 }
 
 export default async function productList(selector, category) {
-    //console.log("selector: ", selector);
-    //console.log("category: ", category);
-    const el = document.getElementById(selector);
+    //console.log("Line 18 selector: ", selector);
+    //console.log("Line 19 category: ", category);
+    //const el = document.getElementById(selector);
+    const el = qs(selector);
+    //console.log("Line 21 el: ", el);
     const products = await getData(category);
     renderList(productCardTemplate,products,el);
     //console.log("productList", getData());
