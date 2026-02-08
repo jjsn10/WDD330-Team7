@@ -25,7 +25,7 @@ import productDetails from "./productDetails.mjs";
 
 const productId = getParam("product");
 /*console.log("Line 27: productId:", productId);*/
-(async ()=> await productDetails(productId))();
+(async () => await productDetails(productId))();
 loadHeaderFooter();
 //console.log(productId);
 /*(async () => {
