@@ -25,14 +25,14 @@ export function getParam(param){
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get(param);
 }
-export function renderList(fn, products, el, clear=true) {
+export function renderList(fn, products, el) {
     //const productListElement = document.getElementById(category);
-    const firstFour = products.slice(0, 4);
+    //const firstFour = products.slice(0, 4);
     //el.innerHTML =firstFour.map(fn).join("");
     /*if (clear) {
         el.innerHTML = "";
     }*/
-    el.insertAdjacentHTML("afterbegin", firstFour.map(fn).join(""));
+    el.insertAdjacentHTML("afterbegin", products.map(fn).join(""));
 }
 
  async function loadTemplate(path) {
@@ -59,6 +59,8 @@ export async function loadHeaderFooter(){
 
   const headerElement = document.querySelector("#main-header");
   const footerElement = document.querySelector("#main-footer");
+
+  //console.log("Line 63: headerElement: ", headerElement); 
 
   renderWithTemplate(headerTemplateFn, headerElement);
   renderWithTemplate(footerTemplateFn, footerElement);

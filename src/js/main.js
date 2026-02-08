@@ -6,3 +6,4 @@ await productList(".product-list", "tents");
 
 loadHeaderFooter();
 
+

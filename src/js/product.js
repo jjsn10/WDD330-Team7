@@ -1,4 +1,4 @@
-import { getParam } from "./utils.mjs";
+import { getParam, loadHeaderFooter } from "./utils.mjs";
 //import { findProductById } from "./productData.mjs";
 import productDetails from "./productDetails.mjs";
 
@@ -26,7 +26,7 @@ import productDetails from "./productDetails.mjs";
 const productId = getParam("product");
 /*console.log("Line 27: productId:", productId);*/
 (async ()=> await productDetails(productId))();
-
+loadHeaderFooter();
 //console.log(productId);
 /*(async () => {
   const product = await productDetails(productId);
