@@ -23,6 +23,7 @@ export function setClick(selector, callback) {
 }
 export function getParam(param){
   const urlParams = new URLSearchParams(window.location.search);
+  //console.log("Line 26: urlParams: ", urlParams);
   return urlParams.get(param);
 }
 export function renderList(fn, products, el) {

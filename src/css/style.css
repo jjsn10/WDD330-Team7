@@ -122,16 +122,30 @@ button {
 .products {
   padding: 0.5em;
 }
-.product-list {
+.product-list,
+.categories-list {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
   list-style-type: none;
   padding: 0;
 }
-.product-list a {
+.product-list a,
+.categories-list a {
   text-decoration: none;
   color: var(--dark-grey);
+}
+/* Styles for category list */
+.category-card {
+  flex: 1 1 45%;
+  margin: 0.25em;
+  padding: 0.5em;
+  border: 1px solid var(--light-grey);
+  max-width: 250px;
+}
+.category-card h2 {
+  margin: 0.5em 0;
+  text-align: center;
 }
 /* Styles for product lists */
 .product-card {

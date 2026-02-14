@@ -17,6 +17,7 @@ export default defineConfig({
         cart: resolve(__dirname, "src/cart/index.html"),
         checkout: resolve(__dirname, "src/checkout/index.html"),
         product: resolve(__dirname, "src/product_pages/index.html"),
+        productList: resolve(__dirname, "src/product-list/index.html"),
         product1: resolve(
           __dirname,
           "src/product_pages/cedar-ridge-rimrock-2.html",

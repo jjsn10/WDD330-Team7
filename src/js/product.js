@@ -24,7 +24,7 @@ import productDetails from "./productDetails.mjs";
   .addEventListener("click", addToCartHandler);*/
 
 const productId = getParam("product");
-/*console.log("Line 27: productId:", productId);*/
+//console.log("Line 27: productId:", productId);
 (async () => await productDetails(productId))();
 loadHeaderFooter();
 //console.log(productId);

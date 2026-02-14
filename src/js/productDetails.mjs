@@ -4,8 +4,9 @@ import { setLocalStorage, getLocalStorage } from "./utils.mjs";
 let product = {};
 
 export default async function productDetails(productId) {
-
+   console.log("Line 7: productId: ", productId); 
    product = await findProductById(productId);
+   console.log("Line 9: product details: ", product); 
 
   // add listener to Add to Cart button
   //console.log("Line 20: ", document.getElementById("addToCart"));
@@ -29,7 +30,7 @@ function addToCart(){
 function renderProductDetails() {
     document.getElementById("productName").textContent = product.Name;
     document.getElementById("productNameWithoutBrand").textContent = product.NameWithoutBrand;
-    document.getElementById("productImage").src = product.Image;
+    document.getElementById("productImage").src = product.Images.PrimaryLarge;
     document.getElementById("productFinalPrice").textContent = `$${product.FinalPrice}`;
     document.getElementById("productColorName").textContent = product.Colors[0].ColorName;
     document.getElementById("productDescriptionHtmlSimple").innerHTML = product.DescriptionHtmlSimple;
