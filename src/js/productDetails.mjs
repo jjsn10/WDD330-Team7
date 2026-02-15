@@ -4,9 +4,9 @@ import { setLocalStorage, getLocalStorage } from "./utils.mjs";
 let product = {};
 
 export default async function productDetails(productId) {
-   console.log("Line 7: productId: ", productId); 
+   //console.log("Line 7: productId: ", productId); 
    product = await findProductById(productId);
-   console.log("Line 9: product details: ", product); 
+   //console.log("Line 9: product details: ", product); 
 
   // add listener to Add to Cart button
   //console.log("Line 20: ", document.getElementById("addToCart"));

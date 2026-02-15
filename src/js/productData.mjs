@@ -1,5 +1,8 @@
 const baseUrl = import.meta.env.VITE_SERVER_URL;
 
+console.log("Line 3: baseUrl: ", baseUrl);
+console.log("Line 4: ",import.meta.env)
+
 function convertToJson(res) {
   if (res.ok) {
     return res.json();
