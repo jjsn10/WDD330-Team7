@@ -1,15 +1,30 @@
 import { getLocalStorage, renderList } from "./utils.mjs";
 
 export default function renderCartContents() {
-    const cartItems = getLocalStorage("so-cart");
-    //const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-    //document.querySelector(".product-list").innerHTML = htmlItems.join("");
+    const cartItems = getLocalStorage("so-cart") || [];
     const element = document.querySelector(".product-list");
-  
-    renderList(cartItemTemplate,cartItems,element);
+    const cartFooter = document.querySelector("#cart-footer");
+    const cartTotal = document.querySelector("#cart-total");
+
+    element.innerHTML = "";
+
+    if (!cartItems.length) {
+      if (cartFooter) {
+        cartFooter.classList.add("hide");
+      }
+      return;
+    }
+
+    renderList(cartItemTemplate, cartItems, element);
+
+    const total = cartItems.reduce((sum, item) => sum + Number(item.FinalPrice || 0), 0);
+    if (cartTotal) {
+      cartTotal.textContent = `$${total.toFixed(2)}`;
+    }
+    if (cartFooter) {
+      cartFooter.classList.remove("hide");
+    }
 }
-
-
 function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">

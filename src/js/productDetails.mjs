@@ -1,4 +1,4 @@
-import { findProductById } from "./productData.mjs";
+import { findProductById } from "./externalServices.mjs";
 import { setLocalStorage, getLocalStorage } from "./utils.mjs";
 
 let product = {};
@@ -15,7 +15,6 @@ export default async function productDetails(productId) {
   document.getElementById("addToCart").addEventListener("click", addToCart);
 
 }
-
 function addToCart(){
   let cartItems = getLocalStorage("so-cart") || [];
 
@@ -26,7 +25,6 @@ function addToCart(){
   cartItems.push(product);
   setLocalStorage("so-cart", cartItems);
 }
-
 function renderProductDetails() {
     document.getElementById("productName").textContent = product.Name;
     document.getElementById("productNameWithoutBrand").textContent = product.NameWithoutBrand;
