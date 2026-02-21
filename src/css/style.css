@@ -216,6 +216,25 @@ button {
   grid-column: 3;
 }
 
+.checkout-form {
+  padding: 0.5em;
+}
+
+.checkout-form label {
+  display: block;
+  margin: 0.5em 0 0.25em;
+}
+
+.order-summary > ul {
+  padding-left: 0;
+  list-style-type: none;
+}
+.order-summary li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
