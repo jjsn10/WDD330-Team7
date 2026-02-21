@@ -80,7 +80,6 @@ header {
 .highlight {
   color: var(--tertiary-color);
 }
-
 button {
   padding: 0.5em 2em;
   background-color: var(--secondary-color);
@@ -102,7 +101,6 @@ button {
   position: relative;
   text-align: center;
 }
-
 .cart svg {
   width: 25px;
 }
@@ -160,11 +158,9 @@ button {
 .product-card p {
   margin: 0.5em 0;
 }
-
 .card__brand {
   font-size: var(--small-font);
 }
-
 .card__name {
   font-size: 1em;
 }
@@ -175,7 +171,6 @@ button {
   max-width: 500px;
   margin: auto;
 }
-
 .product-detail img {
   width: 100%;
 }
@@ -200,20 +195,58 @@ button {
   grid-row: 1;
   grid-column: 2;
 }
-
 .cart-card__color {
   grid-row: 2;
   grid-column: 2;
 }
-
 .cart-card__quantity {
   grid-row: 1;
   grid-column: 3;
 }
-
 .cart-card__price {
   grid-row: 2;
   grid-column: 3;
+}
+
+.hide {
+  display: none;
+}
+
+.cart-footer {
+  margin-top: 1rem;
+  text-align: right;
+}
+.cart-total {
+  font-size: var(--large-font);
+  font-weight: bold;
+}
+.checkout-button {
+  display: inline-block;
+  padding: 0.5em 2em;
+  background-color: var(--secondary-color);
+  color: white;
+  text-decoration: none;
+}
+.checkout-form {
+  display: grid;
+  gap: 1rem;
+}
+.checkout-form fieldset {
+  border: 1px solid var(--light-grey);
+  padding: 1rem;
+  margin: 0;
+}
+.checkout-form legend {
+  font-weight: bold;
+}
+.checkout-form label {
+  display: block;
+  margin-top: 0.5rem;
+}
+.checkout-form input {
+  width: 100%;
+  padding: 0.4rem;
+  margin-top: 0.2rem;
 }
 
 @media screen and (min-width: 500px) {
