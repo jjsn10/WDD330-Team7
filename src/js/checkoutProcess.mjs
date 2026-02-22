@@ -1,4 +1,26 @@
 import { getLocalStorage, qs } from "./utils.mjs";
+import { checkout } from "./externalServices.mjs";
+
+function formDataToJSON(formElement) {
+  const formData = new FormData(formElement),
+    convertedJSON = {};
+
+  formData.forEach(function (value, key) {
+    convertedJSON[key] = value;
+  });
+
+  return convertedJSON;
+}
+
+function packageItems(items) {
+// convert the list of products from localStorage to the simpler form required for the checkout process. Array.map would be perfect for this.
+  return items.map(item => ({
+    id: item.Id,
+    price: item.FinalPrice,
+    name: item.Name,
+    quantity: 1,
+  }));
+}
 
 const checkoutProcess = {
     key: "",
@@ -52,13 +74,30 @@ const checkoutProcess = {
     // once the totals are all calculated display them in the order summary page
     const elShipping = qs(`${this.outputSelector}` + " #shipping");
     const elTax = qs(`${this.outputSelector}` + " #tax");
-    const elOrderTotal = qs(`${this.outputSelector}` + " #order-total");
+    const elOrderTotal = qs(`${this.outputSelector}` + " #orderTotal");
     //console.log("Line 45: ", elShipping);
     //console.log("Line 45: ", elTax);
     //console.log("Line 45: ", elOrderTotal);
     elShipping.innerText = `$${this.shipping}`;
     elTax.innerText = `$${this.tax}`;
     elOrderTotal.innerText = `$${this.orderTotal}`;
+  },
+  checkout: async function(form) {
+    // build the data object from the calculated fields, the items in the cart, and the information entered into the form
+    const formData = formDataToJSON(form);
+    formData.orderDate = new Date();
+    formData.orderTotal = this.orderTotal;
+    formData.shipping = this.shipping;
+    formData.tax = this.tax;
+    formData.items = packageItems(this.list);
+    // call the checkout method in our externalServices module and send it our data object.
+    console.log("Line 94: Form Data: ", formData);
+    try{
+      const response = await checkout(formData);
+      console.log("Line 97: Checkout Response: ", response);
+    } catch (error) {
+      console.error("Checkout failed: ", error);
+    }
   }
   
 }
