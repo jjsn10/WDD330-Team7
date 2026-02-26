@@ -28,9 +28,9 @@ function addToCart(){
 function renderProductDetails() {
     document.getElementById("productName").textContent = product.Name;
     document.getElementById("productNameWithoutBrand").textContent = product.NameWithoutBrand;
-    document.getElementById("productImage").src = product.Images.PrimaryLarge;
+    document.getElementById("productImage").src = product.Images?.PrimaryLarge || product.Image || '';
     document.getElementById("productFinalPrice").textContent = `$${product.FinalPrice}`;
-    document.getElementById("productColorName").textContent = product.Colors[0].ColorName;
+    document.getElementById("productColorName").textContent = product.Colors?.[0]?.ColorName || '';
     document.getElementById("productDescriptionHtmlSimple").innerHTML = product.DescriptionHtmlSimple;
     document.getElementById("addToCart").dataset.id = product.Id;
 }
