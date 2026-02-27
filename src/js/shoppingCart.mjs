@@ -1,16 +1,46 @@
-import { getLocalStorage, renderList } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 
 export default function renderCartContents() {
     const cartItems = getLocalStorage("so-cart");
     //const htmlItems = cartItems.map((item) => cartItemTemplate(item));
     //document.querySelector(".product-list").innerHTML = htmlItems.join("");
     const element = document.querySelector(".product-list");
-  
-    renderList(cartItemTemplate,cartItems,element);
+    const cartActions = document.querySelector(".cart-actions");
+
+    if (!Array.isArray(cartItems) || cartItems.length === 0) {
+      element.innerHTML = "<li>Your cart is empty.</li>";
+      if (cartActions) {
+        cartActions.style.display = "none";
+      }
+      return;
+    }
+
+    if (cartActions) {
+      cartActions.style.display = "block";
+    }
+
+    element.innerHTML = cartItems.map((item, index) => cartItemTemplate(item, index)).join("");
+
+    element.onclick = (event) => {
+      const removeButton = event.target.closest(".remove-from-cart");
+      if (!removeButton) {
+        return;
+      }
+
+      const indexToRemove = Number(removeButton.dataset.index);
+      if (Number.isNaN(indexToRemove)) {
+        return;
+      }
+
+      const updatedCart = [...cartItems];
+      updatedCart.splice(indexToRemove, 1);
+      setLocalStorage("so-cart", updatedCart);
+      renderCartContents();
+    };
 }
 
 
-function cartItemTemplate(item) {
+function cartItemTemplate(item, index) {
   const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
     <img
@@ -24,6 +54,7 @@ function cartItemTemplate(item) {
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
   <p class="cart-card__quantity">qty: 1</p>
   <p class="cart-card__price">$${item.FinalPrice}</p>
+  <button class="cart-card__remove remove-from-cart" data-index="${index}" type="button">Remove</button>
 </li>`;
 
   return newItem;

@@ -1,4 +1,4 @@
-import { getLocalStorage, qs } from "./utils.mjs";
+import { alertMessage, getLocalStorage, qs } from "./utils.mjs";
 import { checkout } from "./externalServices.mjs";
 
 function formDataToJSON(formElement) {
@@ -91,12 +91,25 @@ const checkoutProcess = {
     formData.tax = this.tax;
     formData.items = packageItems(this.list);
     // call the checkout method in our externalServices module and send it our data object.
-    console.log("Line 94: Form Data: ", formData);
-    try{
-      const response = await checkout(formData);
-      console.log("Line 97: Checkout Response: ", response);
-    } catch (error) {
-      console.error("Checkout failed: ", error);
+    try {
+      await checkout(formData);
+      localStorage.removeItem("so-cart");
+      window.location.href = "/checkout/success.html";
+    } catch (err) {
+      const errorDetail =
+        err?.message?.message ||
+        err?.message?.error ||
+        err?.message ||
+        "Please check your information and try again.";
+      const errorMessage =
+        typeof errorDetail === "string"
+          ? errorDetail
+          : JSON.stringify(errorDetail);
+      alertMessage(`Checkout failed: ${errorMessage}`);
+
+      const errorEl = qs("#checkout-message");
+      errorEl.textContent = `Error: ${errorMessage}`;
+      errorEl.classList.add("checkout-error");
     }
   }
   
