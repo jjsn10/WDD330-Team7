@@ -2,6 +2,39 @@
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
 }
+
+export function alertMessage(message, scroll = true) {
+  const main = document.querySelector("main");
+  if (!main) return;
+
+  const existingAlert = main.querySelector(".alert");
+  if (existingAlert) {
+    existingAlert.remove();
+  }
+
+  const alert = document.createElement("div");
+  alert.classList.add("alert");
+
+  const text = document.createElement("p");
+  text.textContent = message;
+
+  const close = document.createElement("span");
+  close.classList.add("close-alert");
+  close.setAttribute("aria-label", "Close alert");
+  close.textContent = "X";
+
+  alert.append(text, close);
+  alert.addEventListener("click", function (e) {
+    if (e.target.classList.contains("close-alert")) {
+      main.removeChild(this);
+    }
+  });
+
+  main.prepend(alert);
+  if (scroll) {
+    window.scrollTo(0, 0);
+  }
+}
 // or a more concise version if you are into that sort of thing:
 // export const qs = (selector, parent = document) => parent.querySelector(selector);
 

@@ -1,31 +1,44 @@
-import { getLocalStorage, renderList } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 
 export default function renderCartContents() {
     const cartItems = getLocalStorage("so-cart") || [];
     const element = document.querySelector(".product-list");
-    const cartFooter = document.querySelector("#cart-footer");
-    const cartTotal = document.querySelector("#cart-total");
+    const cartActions = document.querySelector(".cart-actions");
 
-    element.innerHTML = "";
-
-    if (!cartItems.length) {
-      if (cartFooter) {
-        cartFooter.classList.add("hide");
+    if (!Array.isArray(cartItems) || cartItems.length === 0) {
+      element.innerHTML = "<li>Your cart is empty.</li>";
+      if (cartActions) {
+        cartActions.style.display = "none";
       }
       return;
     }
 
-    renderList(cartItemTemplate, cartItems, element);
+    if (cartActions) {
+      cartActions.style.display = "block";
+    }
 
-    const total = cartItems.reduce((sum, item) => sum + Number(item.FinalPrice || 0), 0);
-    if (cartTotal) {
-      cartTotal.textContent = `$${total.toFixed(2)}`;
-    }
-    if (cartFooter) {
-      cartFooter.classList.remove("hide");
-    }
+    element.innerHTML = cartItems.map((item, index) => cartItemTemplate(item, index)).join("");
+
+    element.onclick = (event) => {
+      const removeButton = event.target.closest(".remove-from-cart");
+      if (!removeButton) {
+        return;
+      }
+
+      const indexToRemove = Number(removeButton.dataset.index);
+      if (Number.isNaN(indexToRemove)) {
+        return;
+      }
+
+      const updatedCart = [...cartItems];
+      updatedCart.splice(indexToRemove, 1);
+      setLocalStorage("so-cart", updatedCart);
+      renderCartContents();
+    };
 }
-function cartItemTemplate(item) {
+
+
+function cartItemTemplate(item, index) {
   const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
     <img
@@ -39,6 +52,7 @@ function cartItemTemplate(item) {
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
   <p class="cart-card__quantity">qty: 1</p>
   <p class="cart-card__price">$${item.FinalPrice}</p>
+  <button class="cart-card__remove remove-from-cart" data-index="${index}" type="button">Remove</button>
 </li>`;
 
   return newItem;

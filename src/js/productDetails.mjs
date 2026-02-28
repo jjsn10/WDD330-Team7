@@ -1,5 +1,5 @@
 import { findProductById } from "./externalServices.mjs";
-import { setLocalStorage, getLocalStorage } from "./utils.mjs";
+import { alertMessage, setLocalStorage, getLocalStorage } from "./utils.mjs";
 
 let product = {};
 
@@ -24,6 +24,7 @@ function addToCart(){
   //console.log("Line 11: click on addToCart button");
   cartItems.push(product);
   setLocalStorage("so-cart", cartItems);
+  alertMessage(`${product.Name} was added to your cart.`, false);
 }
 function renderProductDetails() {
     document.getElementById("productName").textContent = product.Name;
