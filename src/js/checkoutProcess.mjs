@@ -90,12 +90,15 @@ const checkoutProcess = {
     formData.shipping = this.shipping;
     formData.tax = this.tax;
     formData.items = packageItems(this.list);
+    //console.log("Line 93: Form Data for checkout: ", formData);
     // call the checkout method in our externalServices module and send it our data object.
     try {
-      await checkout(formData);
+      const res = await checkout(formData);
+      console.log("Line 96: Checkout response: ", res);
       localStorage.removeItem("so-cart");
       window.location.href = "/checkout/success.html";
     } catch (err) {
+      //console.error("99: Checkout failed: ", err);
       const errorDetail =
         err?.message?.message ||
         err?.message?.error ||

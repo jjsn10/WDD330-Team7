@@ -14,10 +14,11 @@ document.forms["checkout-form"].addEventListener("submit", (e) => {
 
   //add validation here
   const form = e.target;
+  //console.log("Line 17: Form: ", form);
   if (!form.checkValidity()) {
     form.reportValidity();
     return;
   }
   // e.target would contain our form in this case
-  checkoutProcess.checkout(e.target);
+  checkoutProcess.checkout(form);
 });
