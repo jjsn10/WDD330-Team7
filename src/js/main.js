@@ -8,5 +8,9 @@ loadHeaderFooter();
 // Load alerts from alerts.json
 loadAlerts();
 
-// Load product listing (example category: tents)
-productList(".product-list", "tents");
+// Only run productList if the element exists
+const list = document.querySelector(".product-list");
+
+if (list) {
+  productList(".product-list", "tents");
+}
