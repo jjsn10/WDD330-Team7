@@ -35,3 +35,20 @@ function renderProductDetails() {
     document.getElementById("productDescriptionHtmlSimple").innerHTML = product.DescriptionHtmlSimple;
     document.getElementById("addToCart").dataset.id = product.Id;
 }
+
+if (product.SuggestedRetailPrice && product.SuggestedRetailPrice > product.FinalPrice) {
+
+  const discount = product.SuggestedRetailPrice - product.FinalPrice;
+
+  const percent = Math.round(
+    (discount / product.SuggestedRetailPrice) * 100
+  );
+
+  const discountElement = document.createElement("p");
+  discountElement.className = "product-card__discount";
+  discountElement.textContent = `${percent}% OFF`;
+
+  document
+    .getElementById("productFinalPrice")
+    .insertAdjacentElement("afterend", discountElement);
+}
