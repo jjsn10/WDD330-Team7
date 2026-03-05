@@ -380,3 +380,24 @@ footer {
 .alert-list p {
   margin: 0;
 }
+
+.discount-badge {
+  background: red;
+  color: white;
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  position: absolute;
+  margin: 8px;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: gray;
+  margin-right: 6px;
+}
+
+.sale-price {
+  color: red;
+  font-weight: bold;
+}
