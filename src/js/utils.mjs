@@ -116,3 +116,16 @@ export function updateCartCount() {
     cartCount.textContent = cartItems.length;
   }
 }
+
+/* ---------------- CART ANIMATION FEATURE ---------------- */
+
+export function animateCart() {
+  const cart = document.querySelector(".cart");
+  if (!cart) return;
+
+  cart.classList.add("animate");
+
+  setTimeout(() => {
+    cart.classList.remove("animate");
+  }, 500);
+}
