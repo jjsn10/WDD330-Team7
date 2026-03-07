@@ -28,6 +28,29 @@ export async function findProductById(id) {
   return product.Result;
 }
 
+export async function loginRequest(creds) {
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(creds),
+  };
+  const response = await fetch(baseUrl + "login", options);
+  return convertToJson(response);
+}
+
+export async function getOrders(token) {
+  const options = {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await fetch(baseUrl + "orders", options);
+  return convertToJson(response);
+}
+
 export async function checkout(data) {
   const options = {
     method: "POST",

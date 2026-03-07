@@ -303,3 +303,117 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+/* Orders page */
+.orders {
+  padding: 0.5em;
+}
+
+.orders-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.order-card {
+  border: 1px solid var(--light-grey);
+  border-left: 4px solid var(--primary-color);
+  border-radius: 2px;
+}
+
+.order-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--dark-grey);
+  color: white;
+  padding: 0.5em 1em;
+}
+
+.order-card__id {
+  font-weight: bold;
+  font-size: var(--large-font);
+}
+
+.order-card__date {
+  font-size: var(--small-font);
+  color: var(--light-grey);
+}
+
+.order-card__body {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 1em;
+  padding: 1em;
+}
+
+.order-card__customer {
+  flex: 1 1 180px;
+}
+
+.order-card__customer h3 {
+  margin: 0 0 0.25em;
+  font-size: 1em;
+}
+
+.order-card__customer address {
+  font-style: normal;
+  font-size: var(--small-font);
+  line-height: 1.5;
+  color: #555;
+}
+
+.order-card__items {
+  flex: 2 1 280px;
+  overflow-x: auto;
+}
+
+.order-card__items table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--small-font);
+}
+
+.order-card__items th {
+  text-align: left;
+  border-bottom: 1px solid var(--light-grey);
+  padding: 0.25em 0.5em;
+  color: var(--secondary-color);
+}
+
+.order-card__items td {
+  padding: 0.25em 0.5em;
+  border-bottom: 1px solid #eee;
+}
+
+.order-card__qty,
+.order-card__price {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.order-card__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.5em;
+  align-items: center;
+  padding: 0.5em 1em;
+  background-color: #f9f9f9;
+  border-top: 1px solid var(--light-grey);
+  font-size: var(--small-font);
+}
+
+.order-card__footer strong {
+  font-size: 1rem;
+  color: var(--secondary-color);
+}
+
+.order-card__empty {
+  padding: 2em;
+  text-align: center;
+  color: #777;
+  font-style: italic;
+}
