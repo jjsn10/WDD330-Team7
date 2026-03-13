@@ -28,6 +28,7 @@ img {
 header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 0 10px;
 }
 .logo {
@@ -60,12 +61,11 @@ header {
   font-size: var(--small-font);
   width: 110px;
   height: 80px;
-
+  display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
   box-shadow: 1px 1px 4px var(--light-grey);
   justify-content: center;
-  align-items: center;
   line-height: 1;
 }
 .logo--square img {
@@ -118,24 +118,65 @@ button {
 }
 /* End utility classes */
 
-/* Cart icon styles */
+/* ---------------- CART ICON + BADGE (superscript) ---------------- */
 .cart {
-  padding-top: 1em;
   position: relative;
-  text-align: center;
-}
-.cart svg {
-  width: 25px;
-}
-.cart:hover svg {
-  fill: gray;
+  display: inline-block;
+  padding-top: 0;
+  line-height: 1;
 }
 
-/* End cart icon styles */
+/* icon size — adjust if your svg appears too small/large */
+.cart svg,
+.cart img {
+  width: 34px;
+  height: auto;
+  display: block;
+}
+
+/* hover feedback */
+.cart:hover svg { fill: gray; }
+
+/* superscript-style badge */
+.cart-count {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+
+  min-width: 18px;
+  height: 18px;
+  padding: 0 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  background: #f45b69;
+  border-radius: 999px;
+  text-align: center;
+  line-height: 18px;
+
+  border: 2px solid white;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.08);
+  pointer-events: none;
+  display: none; /* JS will show when >0 */
+}
+
+/* Slightly smaller font when the count is 2 digits (keeps circle tidy) */
+.cart-count[data-count-length="2"] {
+  font-size: 10px;
+  padding: 0 5px;
+  min-width: 20px;
+  height: 20px;
+  line-height: 20px;
+}
+
+/* Optionally force visible */
+.cart-count[data-visible="true"] {
+  display: inline-block;
+}
+/* ---------------- END CART ICON + BADGE ---------------- */
 
 .mission {
   padding: 0 0.5em;
-  /* margin: 0.5em 0; */
   line-height: 1.3;
   max-width: 600px;
   margin: auto;
@@ -203,7 +244,6 @@ button {
   display: grid;
   grid-template-columns: 25% auto 15%;
   font-size: var(--small-font);
-  /* max-height: 120px; */
   align-items: center;
 }
 
@@ -329,34 +369,6 @@ footer {
 
 .cart.animate svg {
   animation: cartBounce 0.5s ease;
-}
-
-.cart {
-  position: relative;
-}
-
-.cart-count {
-  position: absolute;
-  top: -6px;
-  right: -8px;
-  background: #f45b69;
-  color: white;
-  font-size: 0.7rem;
-  font-weight: bold;
-  border-radius: 50%;
-  padding: 3px 6px;
-}
-
-.product-card__discount {
-  color: red;
-  font-weight: bold;
-  font-size: var(--small-font);
-}
-
-.product-card__price-old {
-  text-decoration: line-through;
-  color: var(--light-grey);
-  font-size: var(--small-font);
 }
 
 .cart-card__remove {
