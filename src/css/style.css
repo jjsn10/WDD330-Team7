@@ -401,3 +401,14 @@ footer {
   color: red;
   font-weight: bold;
 }
+#current-orders {
+  width: 70%; /* Make table take full width */
+  border-collapse: collapse; /* Merge borders */
+  table-layout: fixed;
+}
+
+#current-orders th,
+tbody,
+td {
+  text-align: center;
+}
