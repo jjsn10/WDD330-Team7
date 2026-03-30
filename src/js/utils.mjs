@@ -64,6 +64,13 @@ export function getParam(param) {
   return urlParams.get(param);
 }
 
+export function formatCategory(category) {
+  return category
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
 export function renderList(fn, products, el) {
   el.insertAdjacentHTML("afterbegin", products.map(fn).join(""));
 }
@@ -105,6 +112,8 @@ export async function loadHeaderFooter() {
 
   renderWithTemplate(headerTemplateFn, headerElement);
   renderWithTemplate(footerTemplateFn, footerElement);
+
+  updateCartCount();
 }
 
 /* ---------------- CART COUNT FEATURE ---------------- */

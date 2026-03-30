@@ -30,6 +30,25 @@
           comfortably at an affordable price.
         </p>
       </section>
+      <section class="newsletter divider">
+        <h2>Stay in the Loop</h2>
+        <p>Get gear tips, trail inspiration, and exclusive subscriber-only deals delivered straight to your inbox.</p>
+        <form id="newsletter-form" class="newsletter-form" novalidate>
+          <label for="newsletter-email" class="newsletter-label">Email address</label>
+          <div class="newsletter-input-row">
+            <input
+              type="email"
+              id="newsletter-email"
+              name="email"
+              class="newsletter-input"
+              placeholder="you@example.com"
+              required
+            />
+            <button type="submit" class="newsletter-btn">Subscribe</button>
+          </div>
+          <p id="newsletter-message" class="newsletter-message" aria-live="polite"></p>
+        </form>
+      </section>
       <section class="products">
         <h2>Product Categories</h2>
         <ul class="categories-list" id="categories-list">
@@ -73,5 +92,17 @@
       </section>
     </main>
     <footer id="main-footer"></footer>
+    <div id="registration-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal">
+        <button id="modal-close" class="modal-close" aria-label="Close">&times;</button>
+        <h2 id="modal-title">Welcome to SleepOutside!</h2>
+        <p>Register with us for exclusive member deals and early access to sales.</p>
+        <p><strong>Registered members are automatically entered into our monthly giveaway</strong> — this month's prize is a brand-new 3-person tent!</p>
+        <div class="modal-actions">
+          <a href="/login/" class="modal-register-btn">Register Now</a>
+          <button id="modal-dismiss" class="modal-dismiss-btn">Maybe Later</button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
