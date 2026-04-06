@@ -1,4 +1,4 @@
-import { loadHeaderFooter, getParam } from "./utils.mjs";
+import { loadHeaderFooter, getParam, alertMessage } from "./utils.mjs";
 import { login } from "./auth.mjs";
 
 loadHeaderFooter();
@@ -21,5 +21,6 @@ document.querySelector("#loginButton").addEventListener("click", async (e) => {
     await login({ email, password }, redirect);
   } catch (error) {
     console.error("Login failed: ", error);
+    alertMessage(error.message || "Login failed. Please check your credentials.");
   }
 });
