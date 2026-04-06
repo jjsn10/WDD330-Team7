@@ -140,6 +140,69 @@ button {
   max-width: 600px;
   margin: auto;
 }
+.newsletter {
+  padding: 1.5em 0.75em;
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+}
+.newsletter h2 {
+  margin-top: 0;
+  font-family: var(--font-headline);
+  font-size: 1.6em;
+}
+.newsletter p {
+  line-height: 1.5;
+  margin-bottom: 1em;
+}
+.newsletter-label {
+  display: block;
+  margin-bottom: 0.4em;
+  font-size: var(--small-font);
+  font-weight: bold;
+}
+.newsletter-input-row {
+  display: flex;
+  gap: 0.5em;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.newsletter-input {
+  flex: 1 1 200px;
+  max-width: 320px;
+  padding: 0.5em 0.75em;
+  font-size: 1em;
+  border: 1px solid var(--light-grey);
+  border-radius: 2px;
+}
+.newsletter-btn {
+  flex-shrink: 0;
+  padding: 0.5em 1.5em;
+  background-color: var(--secondary-color);
+  color: white;
+  font-size: 1em;
+  border: none;
+  cursor: pointer;
+  margin: 0;
+  display: inline-block;
+  width: auto;
+}
+.newsletter-btn:hover {
+  background-color: var(--primary-color);
+}
+.newsletter-message {
+  margin: 0.75em 0 0;
+  font-size: var(--small-font);
+  min-height: 1.2em;
+}
+.newsletter-message--error {
+  color: red;
+  font-weight: bold;
+}
+.newsletter-message--success {
+  color: var(--secondary-color);
+  font-weight: bold;
+}
 .products {
   padding: 0.5em;
 }
@@ -196,6 +259,16 @@ button {
 }
 .product-detail img {
   width: 100%;
+}
+.product-detail__discount-badge {
+  display: inline-block;
+  margin: 0.25em 0 0.5em;
+  padding: 0.3em 0.75em;
+  background-color: red;
+  color: white;
+  font-size: var(--small-font);
+  font-weight: bold;
+  border-radius: 3px;
 }
 
 /* Start cart list card styles */
@@ -289,6 +362,15 @@ button {
     font-size: inherit;
     grid-template-columns: 150px auto 15%;
   }
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  padding: 0.4em 0.75em;
+  font-size: var(--small-font);
+  color: var(--secondary-color);
+  background-color: #f9f9f9;
+  border-bottom: 1px solid var(--light-grey);
 }
 
 footer {
@@ -434,4 +516,113 @@ td {
 
 .prod-searchbtn:hover {
   background-color: rgb(68, 82, 6);
+/* Registration modal */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 100;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-overlay.modal--visible {
+  display: flex;
+}
+
+.modal {
+  background: white;
+  padding: 2em;
+  max-width: 420px;
+  width: 90%;
+  position: relative;
+  border-top: 4px solid var(--primary-color);
+}
+
+.modal h2 {
+  margin-top: 0;
+  font-family: var(--font-headline);
+  font-size: 1.6em;
+}
+
+.modal p {
+  line-height: 1.5;
+}
+
+.modal-close {
+  position: absolute;
+  top: 0.5em;
+  right: 0.75em;
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: var(--dark-grey);
+  padding: 0;
+  line-height: 1;
+  margin: 0;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 1em;
+  margin-top: 1.5em;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.modal-register-btn {
+  display: inline-block;
+  padding: 0.5em 1.5em;
+  background-color: var(--secondary-color);
+  color: white;
+  text-decoration: none;
+  font-size: var(--large-font);
+}
+
+.modal-dismiss-btn {
+  background: none;
+  color: var(--dark-grey);
+  border: 1px solid var(--light-grey);
+  font-size: 1em;
+  padding: 0.5em 1em;
+  margin: 0;
+  cursor: pointer;
+}
+
+/* Quick View button on product cards */
+.quick-view-btn {
+  display: block;
+  width: 100%;
+  margin: 0.5em 0 0;
+  padding: 0.4em;
+  background-color: var(--tertiary-color);
+  color: var(--dark-grey);
+  font-size: var(--small-font);
+  border: none;
+  cursor: pointer;
+}
+
+.quick-view-btn:hover {
+  background-color: var(--primary-color);
+}
+
+/* Quick View modal */
+.qv-modal {
+  max-width: 540px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.qv-modal-image {
+  width: 100%;
+  display: block;
+  margin-bottom: 0.75em;
+}
+
+.qv-modal-description {
+  font-size: var(--small-font);
+  line-height: 1.5;
+  margin-bottom: 1.25em;
 }
