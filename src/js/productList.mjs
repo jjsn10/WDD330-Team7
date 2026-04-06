@@ -42,8 +42,38 @@ function productCardTemplate(product) {
   `;
 }
 
-export default async function productList(selector, category) {
+export default async function productList(selector, category, query) {
   const el = qs(selector);
+  let products;
+
+  if (query) {
+    const categories = ["tents", "sleeping-bags", "backpacks", "hammocks"];
+    const results = await Promise.all(
+      categories.map(category => getProductsByCategory(category))
+    );
+    const all = results.flat();
+    const q = query.toLowerCase();
+    products = all.filter(product =>
+      product.Name?.toLowerCase().includes(q) ||
+      product.Brand?.Name?.toLowerCase().includes(q) ||
+      product.NameWithoutBrand?.toLowerCase().includes(q)
+    );
+    const heading = document.querySelector(".products h2");
+    heading.textContent = `Results for "${query}"`;
+  } else {
+    products = await getProductsByCategory(category);
+  }
+
+  if (products.length === 0) {
+    el.innerHTML = "<li>No products found.</li>";
+  } else {
+    renderList(productCardTemplate, products, el);
+  }
+
+  // const el = qs(selector);
+  // const products = await getProductsByCategory(category);
+  // renderList(productCardTemplate, products, el);
+
   const products = await getProductsByCategory(category);
   renderList(productCardTemplate, products, el);
 
@@ -54,5 +84,7 @@ export default async function productList(selector, category) {
     breadcrumb.textContent = `${formatCategory(category)} -> (${products.length} items)`;
   }
 }
+  
+
 
 

@@ -113,6 +113,16 @@ export async function loadHeaderFooter() {
   renderWithTemplate(headerTemplateFn, headerElement);
   renderWithTemplate(footerTemplateFn, footerElement);
 
+  /* ---------------- Product Search ---------------- */
+  document.querySelector('.prod-search').addEventListener("submit", (e) => {
+    e.preventDefault();
+    const query = document.querySelector("#search").value.trim();
+
+    if (query) {
+      window.location.href = `/product-list/index.html?q=${encodeURIComponent(query)}`;
+    }
+  });
+
   updateCartCount();
 }
 
@@ -139,3 +149,4 @@ export function animateCart() {
     cart.classList.remove("animate");
   }, 500);
 }
+

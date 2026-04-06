@@ -495,6 +495,27 @@ td {
   text-align: center;
 }
 
+.prod-search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-right: 15%;
+}
+
+#search {
+  height: 25px;
+}
+
+.prod-searchbtn {
+  width: 70px;
+  height: 30px;
+  font-size: 0.5em;
+  border-radius: 10px;
+}
+
+.prod-searchbtn:hover {
+  background-color: rgb(68, 82, 6);
 /* Registration modal */
 .modal-overlay {
   display: none;
