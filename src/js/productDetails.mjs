@@ -54,7 +54,49 @@ function renderProductDetails() {
         priceEl.textContent = `$${product.FinalPrice}`;
     }
 
-    document.getElementById("productColorName").textContent = product.Colors[0].ColorName;
+    const firstColor = product.Colors[0];
+    document.getElementById("productColorName").textContent = firstColor.ColorName;
+    renderColorSwatches(product.Colors);
     document.getElementById("productDescriptionHtmlSimple").innerHTML = product.DescriptionHtmlSimple;
     document.getElementById("addToCart").dataset.id = product.Id;
+}
+
+function renderColorSwatches(colors) {
+    const container = document.getElementById("productColors");
+    if (!container || colors.length <= 1) return;
+
+    container.innerHTML = "";
+    colors.forEach((color, index) => {
+        const btn = document.createElement("button");
+        btn.className = "color-swatch" + (index === 0 ? " color-swatch--selected" : "");
+        btn.dataset.colorName = color.ColorName;
+        btn.dataset.colorPreview = color.ColorPreviewImageSrc || "";
+        btn.title = color.ColorName;
+        btn.setAttribute("aria-label", color.ColorName);
+
+        if (color.ColorChipImageSrc) {
+            const img = document.createElement("img");
+            img.src = color.ColorChipImageSrc;
+            img.alt = color.ColorName;
+            btn.appendChild(img);
+        } else {
+            btn.textContent = color.ColorName;
+        }
+
+        btn.addEventListener("click", () => selectColor(btn, color));
+        container.appendChild(btn);
+    });
+}
+
+function selectColor(btn, color) {
+    document.querySelectorAll(".color-swatch").forEach(s => s.classList.remove("color-swatch--selected"));
+    btn.classList.add("color-swatch--selected");
+    document.getElementById("productColorName").textContent = color.ColorName;
+
+    if (color.ColorPreviewImageSrc) {
+        const img = document.getElementById("productImage");
+        img.src = color.ColorPreviewImageSrc;
+        img.srcset = "";
+    }
+    product.selectedColor = color;
 }
