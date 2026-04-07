@@ -1,4 +1,4 @@
-import { getParam, loadHeaderFooter, getLocalStorage, formatCategory } from "./utils.mjs";
+import { getParam, loadHeaderFooter } from "./utils.mjs";
 //import { findProductById } from "./externalServices.mjs";
 import productDetails from "./productDetails.mjs";
 
@@ -25,14 +25,7 @@ import productDetails from "./productDetails.mjs";
 
 const productId = getParam("product");
 //console.log("Line 27: productId:", productId);
-(async () => {
-  await productDetails(productId);
-  const category = getLocalStorage("so-category");
-  const breadcrumb = document.getElementById("breadcrumb");
-  if (breadcrumb && category) {
-    breadcrumb.textContent = formatCategory(category);
-  }
-})();
+(async () => await productDetails(productId))();
 loadHeaderFooter();
 //console.log(productId);
 /*(async () => {

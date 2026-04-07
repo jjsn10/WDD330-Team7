@@ -1,3 +1,4 @@
+// utils.mjs
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
@@ -38,9 +39,13 @@ export function alertMessage(message, scroll = true) {
   }
 }
 
-// retrieve data from localstorage
+// retrieve data from localstorage (safe parse)
 export function getLocalStorage(key) {
-  return JSON.parse(localStorage.getItem(key));
+  try {
+    return JSON.parse(localStorage.getItem(key));
+  } catch (e) {
+    return null;
+  }
 }
 
 // save data to local storage
@@ -50,12 +55,14 @@ export function setLocalStorage(key, data) {
 
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
-  qs(selector).addEventListener("touchend", (event) => {
+  const el = qs(selector);
+  if (!el) return;
+  el.addEventListener("touchend", (event) => {
     event.preventDefault();
-    callback();
+    callback(event);
   });
 
-  qs(selector).addEventListener("click", callback);
+  el.addEventListener("click", callback);
 }
 
 export function getParam(param) {
@@ -82,21 +89,23 @@ async function loadTemplate(path) {
     const html = await res.text();
     return html;
   }
+  return "";
 }
 
 export function renderWithTemplate(
-  templateFn,
+  templateHtml,
   parentElement,
   data,
   callback,
   position = "afterbegin",
   clear = true
 ) {
+  if (!parentElement) return;
   if (clear) {
     parentElement.innerHTML = "";
   }
 
-  parentElement.insertAdjacentHTML(position, templateFn);
+  parentElement.insertAdjacentHTML(position, templateHtml);
 
   if (callback) {
     callback(data);
@@ -112,28 +121,37 @@ export async function loadHeaderFooter() {
 
   renderWithTemplate(headerTemplateFn, headerElement);
   renderWithTemplate(footerTemplateFn, footerElement);
-
-  /* ---------------- Product Search ---------------- */
-  document.querySelector('.prod-search').addEventListener("submit", (e) => {
-    e.preventDefault();
-    const query = document.querySelector("#search").value.trim();
-
-    if (query) {
-      window.location.href = `/product-list/index.html?q=${encodeURIComponent(query)}`;
-    }
-  });
-
-  updateCartCount();
 }
 
 /* ---------------- CART COUNT FEATURE ---------------- */
 
 export function updateCartCount() {
-  const cartItems = JSON.parse(localStorage.getItem("so-cart")) || [];
-  const cartCount = document.querySelector(".cart-count");
+  const cartItems = (() => {
+    try {
+      return JSON.parse(localStorage.getItem("so-cart")) || [];
+    } catch (e) {
+      return [];
+    }
+  })();
 
-  if (cartCount) {
-    cartCount.textContent = cartItems.length;
+  const cartCount = document.querySelector(".cart-count");
+  if (!cartCount) return;
+
+  const count = Array.isArray(cartItems) ? cartItems.length : 0;
+
+  // Format large counts
+  const displayText = count > 99 ? "99+" : String(count);
+
+  // set helpful attributes for CSS
+  cartCount.setAttribute("data-count-length", displayText.length > 1 ? "2" : "1");
+  cartCount.setAttribute("data-visible", count > 0 ? "true" : "false");
+
+  cartCount.textContent = displayText;
+
+  if (count > 0) {
+    cartCount.style.display = "inline-block";
+  } else {
+    cartCount.style.display = "none";
   }
 }
 
