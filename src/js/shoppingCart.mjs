@@ -17,7 +17,16 @@ export default function renderCartContents() {
       cartActions.style.display = "block";
     }
 
-    element.innerHTML = cartItems.map((item, index) => cartItemTemplate(item, index)).join("");
+    const validItems = cartItems.filter(item => item.Images?.PrimaryMedium && item.Colors?.length);
+    if (validItems.length !== cartItems.length) {
+      setLocalStorage("so-cart", validItems);
+    }
+    if (validItems.length === 0) {
+      element.innerHTML = "<li>Your cart is empty.</li>";
+      if (cartActions) cartActions.style.display = "none";
+      return;
+    }
+    element.innerHTML = validItems.map((item, index) => cartItemTemplate(item, index)).join("");
 
     element.onclick = (event) => {
       const removeButton = event.target.closest(".remove-from-cart");
@@ -30,7 +39,7 @@ export default function renderCartContents() {
         return;
       }
 
-      const updatedCart = [...cartItems];
+      const updatedCart = [...validItems];
       updatedCart.splice(indexToRemove, 1);
       setLocalStorage("so-cart", updatedCart);
       renderCartContents();
