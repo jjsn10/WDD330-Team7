@@ -18,7 +18,7 @@ function packageItems(items) {
     id: item.Id,
     price: item.FinalPrice,
     name: item.Name,
-    quantity: 1,
+    quantity: item.quantity || 1,
   }));
 }
 

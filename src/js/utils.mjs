@@ -66,8 +66,16 @@ export function setClick(selector, callback) {
 }
 
 export function getParam(param) {
-  const urlParams = new URLSearchParams(window.location.search);
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
   return urlParams.get(param);
+}
+
+export function formatCategory(category) {
+  return category
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
 }
 
 export function renderList(fn, products, el) {
@@ -113,16 +121,6 @@ export async function loadHeaderFooter() {
 
   renderWithTemplate(headerTemplateFn, headerElement);
   renderWithTemplate(footerTemplateFn, footerElement);
-
-  // update the cart badge now that the header is in the DOM
-  try {
-    // lazy import/update if updateCartCount exists in this module scope
-    if (typeof updateCartCount === "function") {
-      updateCartCount();
-    }
-  } catch (e) {
-    // nothing
-  }
 }
 
 /* ---------------- CART COUNT FEATURE ---------------- */
@@ -169,3 +167,4 @@ export function animateCart() {
     cart.classList.remove("animate");
   }, 500);
 }
+

@@ -9,6 +9,7 @@
   </head>
   <body>
     <header class="divider" id="main-header"></header>
+    <nav id="breadcrumb" class="breadcrumb"></nav>
     <main class="divider">
       <section class="products">
         <h2>Top Products</h2>
@@ -16,5 +17,11 @@
       </section>
     </main>
     <footer id="main-footer"></footer>
+    <div id="quick-view-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="qv-product-name">
+      <div class="modal qv-modal">
+        <button id="qv-modal-close" class="modal-close" aria-label="Close">&times;</button>
+        <div id="qv-modal-content"></div>
+      </div>
+    </div>
   </body>
 </html>

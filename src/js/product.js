@@ -1,16 +1,36 @@
-// product.js (or any page entry)
-import { loadHeaderFooter, updateCartCount } from "./utils.mjs";
-import productDetails from "./productDetails.mjs"; // keep your imports as needed
+import { getParam, loadHeaderFooter } from "./utils.mjs";
+//import { findProductById } from "./externalServices.mjs";
+import productDetails from "./productDetails.mjs";
 
-(async function init() {
-  await loadHeaderFooter();
+/*function addProductToCart(product) {
+  let cartItems = getLocalStorage("so-cart") || [];
 
-  // update badge now that header is in DOM
-  updateCartCount();
-
-  // your other init code...
-  const productId = (new URLSearchParams(window.location.search)).get("product");
-  if (productId) {
-    await productDetails(productId);
+  if (!Array.isArray(cartItems)) {
+    cartItems = [];
   }
-})();
+  cartItems.push(product);
+  setLocalStorage("so-cart", cartItems);
+}*/
+// add to cart button event handler
+/*async function addToCartHandler(e) {
+  const product = await findProductById(e.currentTarget.dataset.id);
+  //console.log("Line 17: Adding to cart:", product);
+  addProductToCart(product);
+}*/
+
+// add listener to Add to Cart button
+/*document
+  .getElementById("addToCart")
+  .addEventListener("click", addToCartHandler);*/
+
+const productId = getParam("product");
+//console.log("Line 27: productId:", productId);
+(async () => await productDetails(productId))();
+loadHeaderFooter();
+//console.log(productId);
+/*(async () => {
+  const product = await productDetails(productId);
+  console.log("Line 31: ",product);
+})();*/
+/*console.log("Line 29: ",productDetails(productId));
+console.log(findProductById(productId));*/
