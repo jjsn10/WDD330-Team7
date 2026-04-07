@@ -1,6 +1,7 @@
 import { findProductById } from "./externalServices.mjs";
 import { alertMessage, setLocalStorage, getLocalStorage, updateCartCount, animateCart } from "./utils.mjs";
 import { initComments } from "./productComments.mjs";
+import { toggleWishlist, updateWishlistButton } from "./wishList.mjs";
 
 let product = {};
 
@@ -14,6 +15,20 @@ export default async function productDetails(productId) {
   renderProductDetails();
 
   document.getElementById("addToCart").addEventListener("click", addToCart);
+
+  const wishlistBtn = document.getElementById("addToWishlist");
+  if (wishlistBtn) {
+    wishlistBtn.dataset.id = product.Id;
+    updateWishlistButton(wishlistBtn, product.Id);
+    wishlistBtn.addEventListener("click", () => {
+      const added = toggleWishlist(product);
+      updateWishlistButton(wishlistBtn, product.Id);
+      alertMessage(
+        added ? `${product.Name} added to your wish list.` : `${product.Name} removed from your wish list.`,
+        false
+      );
+    });
+  }
 
   initComments(productId);
 }
@@ -61,6 +76,8 @@ function renderProductDetails() {
     renderColorSwatches(product.Colors);
     document.getElementById("productDescriptionHtmlSimple").innerHTML = product.DescriptionHtmlSimple;
     document.getElementById("addToCart").dataset.id = product.Id;
+    const wlBtn = document.getElementById("addToWishlist");
+    if (wlBtn) wlBtn.dataset.id = product.Id;
 }
 
 function renderColorSwatches(colors) {
