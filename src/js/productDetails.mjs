@@ -1,5 +1,6 @@
 import { findProductById } from "./externalServices.mjs";
 import { alertMessage, setLocalStorage, getLocalStorage, updateCartCount, animateCart } from "./utils.mjs";
+import { initComments } from "./productComments.mjs";
 
 let product = {};
 
@@ -14,6 +15,7 @@ export default async function productDetails(productId) {
 
   document.getElementById("addToCart").addEventListener("click", addToCart);
 
+  initComments(productId);
 }
 function addToCart(){
   let cartItems = getLocalStorage("so-cart") || [];
